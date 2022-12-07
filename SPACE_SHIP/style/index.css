@@ -1,0 +1,290 @@
+/* Main Containers */
+body, button, p {
+  font-family: VT323;
+}
+button {
+  font-size: xx-large;
+}
+p {
+  margin:20px;
+}
+
+.outer-container {
+  height: 720px;
+  width: 1280px;
+  background: #eee;
+  border: 5px solid gainsboro;
+}
+
+.game-window {
+  height: 720px;
+  width: 1280px;
+  float: left;
+  position: relative;
+}
+
+
+/* Game Section --- Right Section */
+
+#actual_game{
+    overflow: hidden;
+    display: none;
+    height: 720px;
+    width: 1280px;
+    background-color: white;
+    z-index: 10;
+    right: 0px;
+    top: 0px;
+}
+
+#game_right_section {
+    height: 600px;
+    width: 320px;
+    position: absolute;
+    left: 960px;
+    top: 0px;
+    color: black;
+    z-index: 1;
+}
+
+#scoreword, #danger, #level {
+  text-align:center;
+  font-size: 60px;
+}
+
+#score_num, #danger_num, #level_num {
+  text-align: center;
+  font-size: 40px;
+  color: darkblue;
+}
+
+#player {
+  position: absolute;
+  width: 62px;
+  left: 600px;
+  top: 300px;
+  z-index: 9;
+}
+
+.curAstroid {
+  position: absolute;
+  height: 42px;
+  width: 42px;
+  z-index: 9;
+  right: 0px;
+  top: 0px;
+}
+
+.curAstroid img{
+  position: relative;
+  z-index: 10;
+  height: 80px;
+  left: -17px;
+  top: -15px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+
+
+.menu-word{
+  width:100%;
+  height: 100px;
+  background-color: darkslateblue;
+  border-bottom: 6px;
+  border-bottom-style: groove;
+  font-size: 100px;
+  color: white;
+  text-align:center;
+}
+
+.menu-content-button{
+  width: 200px;
+  height: 100px;
+  font-size: 40px;
+  display: block;
+  background-color: darkslateblue;
+  margin:auto;
+  color: white;
+  margin-top:81px;
+}
+
+.menu-content {
+  width:100%;
+  height:100%;
+  text-align: center;
+  background-image: url('../src/frontpage_background.jpg');
+  background-size:cover;
+  overflow:hidden
+}
+
+
+
+.main-menu_image1 {
+  height:100px;
+  width:100px;
+  line-height: 50px;
+  text-align: center;
+  position: absolute;
+  bottom: 620px;
+  right: 1180px;
+}
+
+.main-menu_image2 {
+  height:100px;
+  width:100px;
+  line-height: 50px;
+  text-align: center;
+  position: absolute;
+  bottom: 620px;
+  right: 5px;
+}
+
+
+#page-finish{
+  padding-top: 20px;
+  display: none;
+  background-color: darkslateblue;
+  width:600px;
+  height:250px;
+  margin:auto;
+}
+
+#page-finish p{
+  color:gainsboro;
+  font-size:30px;
+}
+
+
+#Settings {
+  display: none;
+  width:600px;
+  height:690px;
+  background-color: darkslateblue;
+  position: absolute;
+  top:15px;
+  left: 320px;
+  border: 4px solid gainsboro;
+  text-align: center;
+  font-size:40px;
+  color:white;
+}
+
+.box-vol{
+  width:100%;
+  margin-top:90px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 80%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  opacity: 0.7;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+.dif {
+  margin-top: 50px;
+}
+
+#Settings button{
+  width: 180px;
+  height: 100px;
+  background-color: purple;
+  border: solid 4px transparent;
+  font-size:40px;
+}
+
+#but_close {
+  margin-top:100px;
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.no-vol{
+  position: absolute;
+  bottom: 480px;
+  right: 180px;
+}
+
+
+#Tutorial {
+  display:none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: gainsboro;
+  text-align: center;
+}
+
+#Tutorial p {
+  font-size: 50px;
+}
+
+#Tutorial button {
+  width: 200px;
+  height: 75px;
+  margin:auto;
+  margin-top:20px;
+  display:block;
+}
+
+.setting_image {
+  width: 100px;
+  height: 100px;
+}
+
+
+#get_ready{
+  font-size:75px;
+  color:rgb(0, 0, 0);
+}
+
+#text{
+  font-size:50px;
+  color:rgb(0, 0, 0);
+  margin-top: 40px;
+}
+
+#page_ready{
+  text-align: center;
+  margin-top: 150px;
+}
+
+#ready{
+  font-size:75px;
+  margin-top: 100px;
+}
+
+#arrow{
+  margin-top: 100px;
+}
+
+
+.port {
+  position: absolute;
+  z-index: 9;
+  height: 62px;
+  width: 62px;
+}
+
+.shield {
+  position: absolute;
+  z-index: 9;
+  width: 62px;
+  height: 62px;
+}
