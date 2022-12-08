@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+   <title> 493 Artist Search</title>
+   <!--Bootstrap-->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"></script>
+   <!--Custom Style-->
+   <link rel="stylesheet" type="text/css" href="index.css">
+   <!--Vue-->
+   <script src="https://unpkg.com/vue@3"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+</head>
+
+<body>
+   <div id='app'>
+      <nav class="navbar navbar-default">
+         <div class="container">
+            <div class="navbar-header">
+               <h3>493 Artist Search</h3>
+            </div>
+         </div>
+      </nav>
+      <div class="container">
+         <div class="row searchbar">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+               <h4>Enter the name of the artist and enter: </h4>
+               <input v-model="inputtext" @keyup.enter="search"  type="text">
+            </div>
+         </div>
+
+         <h4>Search Result (Total {{resultCount}} Found.)</h4>         
+
+         <div class="col-lg-12 col-md-12 col-sm-12">
+            <div>
+               <button @click = "filterHandler('All')" class="btn btn-success">ALL</button>
+            </div>
+            <div style="display:inline" v-for= "item in allGenere">
+               <button @click = "filterHandler(item)" :class = "mapGenere.get(item+'chooseTheGenere')" style="margin:2px;">{{item}}</button>
+            </div>
+            <h4>
+               List of results
+            </h4>
+            <div class="dropdown">
+               <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort list of results by:
+               <span class="caret"></span></button>
+               <ul class="dropdown-menu">
+                 <li :class="onedrop"> <a @click="sortHandler(0)">Reset to original</a></li>
+                 <li :class="twodrop"><a @click="sortHandler(1)" href="#">Collection Name</a></li>
+                 <li :class="threedrop"> <a @click="sortHandler(2)" href="#">Price</a></li>
+               </ul>
+             </div>
+         </div>
+
+         <div v-for= "(item, index) in tmp" >
+            <div v-if="index %2 == 0">
+            <div v-if=" chooseGenere.has(tmp[index][8])">
+            <div class='col-lg-6 col-md-6 col-sm-6 artist'>
+               <div class='artist-albumcover col-sm-4'>
+                  <img v-bind:src="tmp?.[index]?.[7]">
+               </div>
+
+               <div class='artist-info col-sm-6'>
+                  <ul class="nav nav-tabs">
+                     <li class="active"><a data-toggle="tab" :href="'#Description' + index">Description</a></li>
+                     <li><a data-toggle="tab" :href="'#Track' + index">Track Info.</a></li>
+                  </ul>
+                  <div class="tab-content">
+                     <div :id="'Description' + index" class="tab-pane fade in active">
+                        <div class="tab-content-box">
+                          <b class="inline-block">Artist Name: </b> 
+                          <span>{{tmp?.[index]?.[0]}}</span>
+                        </div>
+                        <div class="tab-content-box">
+                           <b class="inline-block">Collection Name: </b> 
+                           <span>{{tmp?.[index]?.[1]}}</span>
+                        </div>
+                     
+                        <div class="tab-content-box">
+                           <b class="inline-block">Price: </b>
+                           <span>{{tmp?.[index]?.[2]}}</span>
+                        </div>
+                     
+                        <div class="tab-content-box">
+                           <b class="inline-block">Kind: </b>                     
+                           <span>{{tmp?.[index]?.[3]}}</span>
+                        </div>
+                        <div class="tab-content-box">
+                           <b class="inline-block">Preview: </b> 
+                           <b v-if="tmp?.[index]?.[4] == undefined">No information provided</b> 
+                           <a v-else :href= "tmp?.[index]?.[4]"> Link</a>
+                        </div>
+                     </div>  
+
+                     <div :id="'Track' + index" class="tab-pane fade">
+                        <div class="tab-content-box">
+                           <b class="inline-block">Track ID: </b> 
+                           <span>{{tmp?.[index]?.[5]}}</span>
+                         </div>
+
+                         <div class="tab-content-box">
+                           <b class="inline-block">Country: </b> 
+                           <span>{{tmp?.[index]?.[6]}}</span>
+                         </div>  
+                     </div>
+               </div>
+
+               </div>
+            </div>
+
+            <div class='col-lg-6 col-md-6 col-sm-6 artist'>
+               <div class='artist-albumcover col-sm-4'>
+                  <img v-bind:src="tmp?.[index + 1]?.[7]">
+               </div>
+
+               <div class='artist-info col-sm-6'>
+                  <ul class="nav nav-tabs">
+                     <li class="active"><a data-toggle="tab" :href="'#Description' + index + 1">Description</a></li>
+                     <li><a data-toggle="tab" :href="'#Track' + index + 1">Track Info.</a></li>
+                  </ul>
+                  <div class="tab-content">
+                     <div :id="'Description' + index + 1" class="tab-pane fade in active">
+                        <div class="tab-content-box">
+                          <b class="inline-block">Artist Name: </b> 
+                          <span>{{tmp?.[index + 1]?.[0]}}</span>
+                        </div>
+                        <div class="tab-content-box">
+                           <b class="inline-block">Collection Name: </b> 
+                           <span>{{tmp?.[index + 1]?.[1]}}</span>
+                        </div>
+                     
+                        <div class="tab-content-box">
+                           <b class="inline-block">Price: </b>
+                           <span>{{tmp?.[index + 1]?.[2]}}</span>
+                        </div>
+                     
+                        <div class="tab-content-box">
+                           <b class="inline-block">Kind: </b>                     
+                           <span>{{tmp?.[index + 1]?.[3]}}</span>
+                        </div>
+                        <div class="tab-content-box">
+                           <b class="inline-block">Preview: </b> 
+                           <b v-if="tmp?.[index + 1]?.[4] == undefined">No information provided</b> 
+                           <a v-else :href= "tmp?.[index + 1]?.[4]"> Link</a>
+                        </div>
+                     </div>  
+
+                     <div :id="'Track' + index + 1" class="tab-pane fade">
+                        <div class="tab-content-box">
+                           <b class="inline-block">Track ID: </b> 
+                           <span>{{tmp?.[index + 1]?.[5]}}</span>
+                         </div>
+
+                         <div class="tab-content-box">
+                           <b class="inline-block">Country: </b> 
+                           <span>{{tmp?.[index + 1]?.[6]}}</span>
+                         </div>  
+                     </div>
+                  </div>
+               </div>
+            </div>
+            </div>
+         </div>
+         </div>
+      </div>
+   </div>
+   <script src="script.js"></script>
+</body>
+</html>
